@@ -4,13 +4,12 @@
 #include <sstream>
 
 using namespace std;
+
 const int SUCCESS=0;
-const int COULD_NOT_OPEN_FILE =-1;
+const int COULD_NOT_OPEN_FILE = -1;
+const char DELIMETER_TO_SEARCH_FOR = ',';
 
-const string INPUT_FILE ="input.txt";
-const string OUTPUT_FILE ="output.txt";
-const char SEPERATOR = ' ';
-
+const string INPUT_FILE = "input.txt";
 struct person{
 	string first;
 	string last;
@@ -23,29 +22,31 @@ int main() {
 	ifstream myInputfile;
 	myInputfile.open(INPUT_FILE.c_str());
 
-	//make sure its opened, return failure code if not
-	if (!myInputfile.is_open())
+	//verify that the file is open
+	if(!myInputfile.is_open())
 		return COULD_NOT_OPEN_FILE;
 
-	string line;
+	std::string line;
 	person mp;
 
-	//use for loop or while loop?
-	//for(int i=0; i< WHATGOESHERE?<i++)  #bad choice if you have no idea how many times thru the loop
-	while(!myInputfile.eof())	{
+	//how to read? for loop? while loop?
+	while(!myInputfile.eof()){
 
-		//get a line line from file
 		getline(myInputfile, line);
 
-		//parsing out tokens between ' 's in that line
+		//read the file (parsing out tokens between DELIMETER_TO_SEARCH_FOR)
 		//chuck each line in a struct that holds first name,last name
 		stringstream ss(line);
-		getline(ss, mp.first,SEPERATOR);
-		getline(ss, mp.last,SEPERATOR);
+		getline(ss,mp.first,DELIMETER_TO_SEARCH_FOR);
+		getline(ss,mp.last,DELIMETER_TO_SEARCH_FOR);
 
 		//put each struct in a vector
 		mv.push_back(mp);
 	}
+
+
+
+
 
 	//close the file
 

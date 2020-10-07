@@ -1,2 +1,2 @@
-brian perkins
-durwood allen
+brian,perkins
+durwood,allen
